@@ -1,0 +1,63 @@
+<?php //góra strony z szablonu 
+include _ROOT_PATH.'/../css/main.css';
+?>
+
+<h3>Prosty kalkulator</h3>
+
+<h2><form class="pure-form pure-form-stacked" action="<?php print(_APP_ROOT);?>/app/calc.php" method="post">
+	<fieldset>
+		<label for="x">Wartość pożyczki</label>
+		<input id="x" type="text" placeholder="Wysokość pożyczki" name="x" value="<?php out($form['x']); ?>">
+
+		<label for="y">Ilość rat</label>
+		<input id="y" type="text" placeholder="Ilość rat" name="y" value="<?php out($form['y']); ?>">
+					
+		<label for="z">Oprocentowanie</label>
+		<input id="z" type="text" placeholder="Oprocentowanie" name="z" value="<?php out($form['z']); ?>">
+
+	</fieldset>
+	<button type="submit" class="pure-button pure-button-primary">Oblicz</button>
+</form>
+
+<div class="messages">
+
+<?php
+//wyświeltenie listy błędów, jeśli istnieją
+if (isset($messages)) {
+	if (count ( $messages ) > 0) {
+	echo '<h4>Wystąpiły błędy: </h4>';
+	echo '<ol class="err">';
+		foreach ( $messages as $key => $msg ) {
+			echo '<li>'.$msg.'</li>';
+		}
+		echo '</ol>';
+	}
+}
+?>
+
+<?php
+//wyświeltenie listy informacji, jeśli istnieją
+if (isset($infos)) {
+	if (count ( $infos ) > 0) {
+	echo '<h4>Informacje: </h4>';
+	echo '<ol class="inf">';
+		foreach ( $infos as $key => $msg ) {
+			echo '<li>'.$msg.'</li>';
+		}
+		echo '</ol>';
+	}
+}
+?>
+
+<?php if (isset($result)){ ?>
+	<h3>Wynik</h3>
+	<p class="res">
+<?php print($result); ?>
+	</p>
+<?php } ?>
+
+</div>
+</h2>
+<?php 
+include _ROOT_PATH.'/templates/bottom.php';
+?>
